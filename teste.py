@@ -402,7 +402,7 @@ class CRUDApp:
 
          # Botão para selecionar imagem
         tk.Label(window, text="Escudo do Time (JPG):").grid(row=5, column=0)
-        self.caminho_imagem = tk.StringVar()  # Variável para armazenar o caminho da imagem
+        self.escudo = tk.StringVar()  # Variável para armazenar o caminho da imagem
         tk.Button(window, text="Selecionar Imagem", command=self.selecionar_imagem).grid(row=5, column=1)
 
         def submit():
@@ -411,8 +411,8 @@ class CRUDApp:
             fundacao = fundacao_entry.get()
             mascote = mascote_entry.get()
             n_titulos = n_titulos_entry.get()
-            caminho_imagem = self.caminho_imagem.get()
-            resultado = self.crud_time.inserir(sigla, nome_clube, fundacao, mascote, n_titulos, caminho_imagem)
+            escudo = self.escudo.get()
+            resultado = self.crud_time.inserir(sigla, nome_clube, fundacao, mascote, n_titulos, escudo)
             messagebox.showinfo("Resultado", resultado)
 
         tk.Button(window, text="Inserir", command=submit).grid(row=6, column=0, columnspan=2)

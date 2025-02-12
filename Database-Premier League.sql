@@ -4,7 +4,8 @@ CREATE TABLE Time (
     Nome_clube VARCHAR(100) NOT NULL,
     Fundacao DATE NOT NULL,
     Mascote VARCHAR(50),
-    N_Titulos INT DEFAULT 0
+    N_Titulos INT DEFAULT 0,
+    Escudo BYTEA
 );
 
 -- Criação da Tabela Departamentos
@@ -20,17 +21,16 @@ CREATE TABLE Funcionarios (
     Idade INT CHECK (Idade > 0),
     Profissao VARCHAR(50) NOT NULL,
     SIGLA_departamento VARCHAR(10) REFERENCES Departamentos(SIGLA_departamento) ON DELETE SET NULL,
-    Sigla_time VARCHAR(3) REFERENCES Time(Sigla) ON DELETE SET NULL
+    Sigla_time VARCHAR(10) REFERENCES Time(Sigla) ON DELETE CASCADE  -- Apaga funcionários ao deletar o time
 );
 
 -- Criação da Tabela Rel1 (Relacionamento entre Funcionarios e Time)
-
 CREATE TABLE Rel1 (
     Matricula INT,                -- Chave primária e estrangeira para a tabela Funcionarios
-    Sigla VARCHAR(50),            -- Chave primária e estrangeira para a tabela Time
+    Sigla VARCHAR(10),            -- Chave primária e estrangeira para a tabela Time
     PRIMARY KEY (Matricula, Sigla),  -- Chave primária composta
-    FOREIGN KEY (Matricula) REFERENCES Funcionarios(Matricula),  -- Referência à tabela Funcionarios
-    FOREIGN KEY (Sigla) REFERENCES Time(Sigla)  -- Referência à tabela Time
+    FOREIGN KEY (Matricula) REFERENCES Funcionarios(Matricula) ON DELETE CASCADE,  -- Apaga relacionamento ao deletar funcionário
+    FOREIGN KEY (Sigla) REFERENCES Time(Sigla) ON DELETE CASCADE  -- Apaga relacionamento ao deletar o time
 );
 
 -- Criação da Tabela Posicao
@@ -45,7 +45,7 @@ CREATE TABLE Elenco (
     Nome_jogador VARCHAR(100) NOT NULL,
     Idade INT CHECK (Idade > 0),
     Valor_mercado DECIMAL(15,2),
-    Sigla VARCHAR(10) REFERENCES Time(Sigla) ON DELETE CASCADE
+    Sigla VARCHAR(10) REFERENCES Time(Sigla) ON DELETE CASCADE  -- Apaga jogadores ao deletar o time
 );
 
 -- Criação da Tabela Classificacao
@@ -58,7 +58,7 @@ CREATE TABLE Classificacao (
     Saldo_Gols INT DEFAULT 0,
     Gols_feitos INT DEFAULT 0,
     Gols_sofridos INT DEFAULT 0,
-    Sigla VARCHAR(10) REFERENCES Time(Sigla) ON DELETE CASCADE
+    Sigla VARCHAR(10) REFERENCES Time(Sigla) ON DELETE CASCADE  -- Apaga classificação ao deletar o time
 );
 
 -- Criação da Tabela Estadio
@@ -67,7 +67,7 @@ CREATE TABLE Estadio (
     Ano_criacao INT CHECK (Ano_criacao > 1800),
     Gramado VARCHAR(50),
     Capacidade INT CHECK (Capacidade > 0),
-    Sigla VARCHAR(10) REFERENCES Time(Sigla) ON DELETE CASCADE
+    Sigla VARCHAR(10) REFERENCES Time(Sigla) ON DELETE CASCADE  -- Apaga estádio ao deletar o time
 );
 
 -- Criação da Tabela Patrocinadores
@@ -77,7 +77,7 @@ CREATE TABLE Patrocinadores (
     Tipo_acordo VARCHAR(50) NOT NULL,
     Valor DECIMAL(15,2),
     Duracao INT CHECK (Duracao > 0),
-    Sigla VARCHAR(10) REFERENCES Time(Sigla) ON DELETE CASCADE
+    Sigla VARCHAR(10) REFERENCES Time(Sigla) ON DELETE CASCADE  -- Apaga patrocínios ao deletar o time
 );
 
 -- Criação da Tabela Rel (Relacionamento entre Time e Patrocinadores)
@@ -85,8 +85,8 @@ CREATE TABLE Rel (
     Sigla VARCHAR(10),
     ID_requerimento INT,
     PRIMARY KEY (Sigla, ID_requerimento),
-    FOREIGN KEY (Sigla) REFERENCES Time(Sigla) ON DELETE CASCADE,
-    FOREIGN KEY (ID_requerimento) REFERENCES Patrocinadores(ID_requerimento) ON DELETE CASCADE
+    FOREIGN KEY (Sigla) REFERENCES Time(Sigla) ON DELETE CASCADE,  -- Apaga relacionamento ao deletar o time
+    FOREIGN KEY (ID_requerimento) REFERENCES Patrocinadores(ID_requerimento) ON DELETE CASCADE  -- Apaga relacionamento ao deletar patrocínio
 );
 
 -- Criação da Tabela Confronto
@@ -102,7 +102,7 @@ CREATE TABLE Jogos (
     Data_jogo DATE NOT NULL,
     Rodada INT CHECK (Rodada > 0),
     Placar VARCHAR(10),
-    Id_confronto INT REFERENCES Confronto(Id_confronto) ON DELETE CASCADE
+    Id_confronto INT REFERENCES Confronto(Id_confronto) ON DELETE CASCADE  -- Apaga jogo ao deletar confronto
 );
 
 -- Criação da Tabela Arbitros
@@ -116,8 +116,8 @@ CREATE TABLE Jogos_Arbitros (
     ID_Jogo INT,
     ID_Arbitro INT,
     PRIMARY KEY (ID_Jogo, ID_Arbitro),
-    FOREIGN KEY (ID_Jogo) REFERENCES Jogos(ID_Jogo) ON DELETE CASCADE,
-    FOREIGN KEY (ID_Arbitro) REFERENCES Arbitros(ID_Arbitro) ON DELETE CASCADE
+    FOREIGN KEY (ID_Jogo) REFERENCES Jogos(ID_Jogo) ON DELETE CASCADE,  -- Apaga relacionamento ao deletar jogo
+    FOREIGN KEY (ID_Arbitro) REFERENCES Arbitros(ID_Arbitro) ON DELETE CASCADE  -- Apaga relacionamento ao deletar árbitro
 );
 
 -- Criação da Tabela Rel11 (Relacionamento entre Sigla e Departamentos)
@@ -125,8 +125,8 @@ CREATE TABLE Rel11 (
     Sigla VARCHAR(10),
     SIGLA_departamento VARCHAR(10),
     PRIMARY KEY (Sigla, SIGLA_departamento),
-    FOREIGN KEY (Sigla) REFERENCES Time(Sigla) ON DELETE CASCADE,
-    FOREIGN KEY (SIGLA_departamento) REFERENCES Departamentos(SIGLA_departamento) ON DELETE CASCADE
+    FOREIGN KEY (Sigla) REFERENCES Time(Sigla) ON DELETE CASCADE,  -- Apaga relacionamento ao deletar o time
+    FOREIGN KEY (SIGLA_departamento) REFERENCES Departamentos(SIGLA_departamento) ON DELETE CASCADE  -- Apaga relacionamento ao deletar departamento
 );
 
 -- Dados

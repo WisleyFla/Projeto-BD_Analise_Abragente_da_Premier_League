@@ -5,13 +5,13 @@ class CRUDTime:
         self.connection = conecta_bd()
         self.cursor = self.connection.cursor()
 
-    def inserir(self, sigla, nome_clube, fundacao, mascote, n_titulos, caminho_imagem):
+    def inserir(self, sigla, nome_clube, fundacao, mascote, n_titulos, escudo):
         try:
             cmd_insert = """
-                INSERT INTO time (sigla, nome_clube, fundacao, mascote, n_titulos, caminho_imagem)
+                INSERT INTO time (sigla, nome_clube, fundacao, mascote, n_titulos, escudo)
                 VALUES (%s, %s, %s, %s, %s, %s)
             """
-            valores = (sigla, nome_clube, fundacao, mascote, n_titulos, caminho_imagem)
+            valores = (sigla, nome_clube, fundacao, mascote, n_titulos, escudo)
             self.cursor.execute(cmd_insert, valores)
             self.connection.commit()
             return "Time inserido com sucesso!"
@@ -20,25 +20,35 @@ class CRUDTime:
 
     def deletar(self, sigla):
         try:
-            cmd_delete = "DELETE FROM time WHERE sigla = %s"
-            self.cursor.execute(cmd_delete, (sigla,))
+            # Comando para deletar o time
+            cmd_delete_time = "DELETE FROM Time WHERE Sigla = %s"
+            self.cursor.execute(cmd_delete_time, (sigla,))
+            
+            # Commit da transação
             self.connection.commit()
-            return "Time deletado com sucesso!"
+            return "Time e dados relacionados deletados com sucesso!"
         except Exception as err:
+            # Rollback em caso de erro
+            self.connection.rollback()
             return f"Erro ao deletar time: {err}"
 
     def atualizar(self, sigla, nome_clube, fundacao, mascote, n_titulos):
         try:
-            cmd_update = """
-                UPDATE time
-                SET nome_clube = %s, fundacao = %s, mascote = %s, n_titulos = %s
-                WHERE sigla = %s
+            # Comando para atualizar os dados do time
+            cmd_update_time = """
+                UPDATE Time
+                SET Nome_clube = %s, Fundacao = %s, Mascote = %s, N_Titulos = %s
+                WHERE Sigla = %s
             """
-            valores = (nome_clube, fundacao, mascote, n_titulos, sigla)
-            self.cursor.execute(cmd_update, valores)
+            valores_time = (nome_clube, fundacao, mascote, n_titulos, sigla)
+            self.cursor.execute(cmd_update_time, valores_time)
+            
+            # Commit da transação
             self.connection.commit()
             return "Time atualizado com sucesso!"
         except Exception as err:
+            # Rollback em caso de erro
+            self.connection.rollback()
             return f"Erro ao atualizar time: {err}"
 
     def selecionar(self, sigla=None):
