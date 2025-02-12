@@ -23,6 +23,16 @@ CREATE TABLE Funcionarios (
     Sigla_time VARCHAR(3) REFERENCES Time(Sigla) ON DELETE SET NULL
 );
 
+-- Criação da Tabela Rel1 (Relacionamento entre Funcionarios e Time)
+
+CREATE TABLE Rel1 (
+    Matricula INT,                -- Chave primária e estrangeira para a tabela Funcionarios
+    Sigla VARCHAR(50),            -- Chave primária e estrangeira para a tabela Time
+    PRIMARY KEY (Matricula, Sigla),  -- Chave primária composta
+    FOREIGN KEY (Matricula) REFERENCES Funcionarios(Matricula),  -- Referência à tabela Funcionarios
+    FOREIGN KEY (Sigla) REFERENCES Time(Sigla)  -- Referência à tabela Time
+);
+
 -- Criação da Tabela Posicao
 CREATE TABLE Posicao (
     Sigla_posicao VARCHAR(10) PRIMARY KEY,
@@ -902,6 +912,99 @@ INSERT INTO Funcionarios (Nome_funcionario, Idade, Profissao, SIGLA_departamento
 ('Ricardo Pacheco', 50, 'Analista de Saúde Esportiva', 'Médico', 'SHE'),
 ('Marcelo Antunes', 43, 'Terapeuta Físico', 'Médico', 'LUT');
 
+-- Tabela Rel1:
+
+-- Inserindo dados na tabela Rel1
+INSERT INTO Rel1 (Matricula, Sigla) VALUES
+-- Departamento de Futebol
+(1, 'ARS'),  -- Carlos Eduardo
+(2, 'MCI'),  -- Marcos Silva
+(3, 'MUN'),  -- Fernando Souza
+(4, 'LIV'),  -- José Ricardo
+(5, 'CHE'),  -- Luiz Felipe
+(6, 'TOT'),  -- Paulo César
+(7, 'NEW'),  -- Bruno Mendes
+(8, 'AST'),  -- Rafael Cardoso
+(9, 'WHU'),  -- Thiago Santos
+(10, 'BHA'), -- Diego Ferreira
+(11, 'BRE'), -- Lucas Moura
+(12, 'FUL'), -- Vinícius Almeida
+(13, 'CRY'), -- Anderson Costa
+(14, 'BOU'), -- Fábio Lima
+(15, 'WOL'), -- Eduardo Tavares
+(16, 'EVE'), -- Gustavo Nogueira
+(17, 'NFO'), -- Alexandre Santos
+(18, 'BUR'), -- João Pedro
+(19, 'SHE'), -- Henrique Lima
+(20, 'LUT'), -- Carlos Santana
+
+-- Departamento de Marketing
+(21, 'ARS'), -- Ana Paula
+(22, 'MCI'), -- Ricardo Mendes
+(23, 'MUN'), -- Juliana Castro
+(24, 'LIV'), -- Vanessa Oliveira
+(25, 'CHE'), -- Cláudio Ramos
+(26, 'TOT'), -- Fernanda Martins
+(27, 'NEW'), -- Thiago Lopes
+(28, 'AST'), -- Isabela Souza
+(29, 'WHU'), -- Lucas Ribeiro
+(30, 'BHA'), -- Camila Dias
+(31, 'BRE'), -- Gabriela Alves
+(32, 'FUL'), -- Eduardo Teixeira
+(33, 'CRY'), -- Roberta Nunes
+(34, 'BOU'), -- Fábio Oliveira
+(35, 'WOL'), -- Beatriz Souza
+(36, 'EVE'), -- Renato Farias
+(37, 'NFO'), -- Luciana Torres
+(38, 'BUR'), -- Bruno Santiago
+(39, 'SHE'), -- Camila Freitas
+(40, 'LUT'), -- Pedro Henrique
+
+-- Departamento Financeiro
+(41, 'ARS'), -- Roberto Lima
+(42, 'MCI'), -- Mariana Alves
+(43, 'MUN'), -- Paulo Henrique
+(44, 'LIV'), -- Bruno Almeida
+(45, 'CHE'), -- Rodrigo Martins
+(46, 'TOT'), -- Daniel Souza
+(47, 'NEW'), -- Fernanda Lopes
+(48, 'AST'), -- Carla Mendes
+(49, 'WHU'), -- Lucas Tavares
+(50, 'BHA'), -- Tatiane Borges
+(51, 'BRE'), -- Ricardo Farias
+(52, 'FUL'), -- Alex Nascimento
+(53, 'CRY'), -- Beatriz Mendes
+(54, 'BOU'), -- João Batista
+(55, 'WOL'), -- Renata Lima
+(56, 'EVE'), -- Patrícia Castro
+(57, 'NFO'), -- Carlos Ramos
+(58, 'BUR'), -- Eduardo Santos
+(59, 'SHE'), -- Mateus Oliveira
+(60, 'LUT'), -- Daniel Rocha
+
+-- Departamento Médico
+(61, 'ARS'), -- Dra. Camila Rezende
+(62, 'MCI'), -- Dr. João Peixoto
+(63, 'MUN'), -- Carla Rodrigues
+(64, 'LIV'), -- Marcelo Duarte
+(65, 'CHE'), -- Fernanda Sampaio
+(66, 'TOT'), -- Lucas Farias
+(67, 'NEW'), -- Rafaela Silva
+(68, 'AST'), -- Eduardo Campos
+(69, 'WHU'), -- Bruna Oliveira
+(70, 'BHA'), -- Guilherme Costa
+(71, 'BRE'), -- Vinícius Rocha
+(72, 'FUL'), -- Fernanda Souza
+(73, 'CRY'), -- Rodrigo Pereira
+(74, 'BOU'), -- Jéssica Mendes
+(75, 'WOL'), -- Henrique Nunes
+(76, 'EVE'), -- Gustavo Amaral
+(77, 'NFO'), -- Lucas Carvalho
+(78, 'BUR'), -- Roberta Andrade
+(79, 'SHE'), -- Ricardo Pacheco
+(80, 'LUT'); -- Marcelo Antunes
+
+
 CREATE OR REPLACE PROCEDURE AtualizarTitulosTime(
     IN sigla_time VARCHAR(10),
     IN novos_titulos INT
@@ -925,7 +1028,6 @@ $$;
 
 CREATE OR REPLACE VIEW ClassificacaoDetalhada AS
 SELECT
-    T.Sigla,
     T.Nome_clube,
     C.Pontos,
     C.Vitoria,

@@ -388,7 +388,7 @@ class CRUDApp:
         nome_clube_entry = tk.Entry(window)
         nome_clube_entry.grid(row=1, column=1)
 
-        tk.Label(window, text="Ano de Fundação:").grid(row=2, column=0)
+        tk.Label(window, text="Data de Fundação:").grid(row=2, column=0)
         fundacao_entry = tk.Entry(window)
         fundacao_entry.grid(row=2, column=1)
 
@@ -396,7 +396,7 @@ class CRUDApp:
         mascote_entry = tk.Entry(window)
         mascote_entry.grid(row=3, column=1)
 
-        tk.Label(window, text="Número de Títulos:").grid(row=4, column=0)
+        tk.Label(window, text="Número de Títulos(PL):").grid(row=4, column=0)
         n_titulos_entry = tk.Entry(window)
         n_titulos_entry.grid(row=4, column=1)
 
@@ -415,7 +415,7 @@ class CRUDApp:
             resultado = self.crud_time.inserir(sigla, nome_clube, fundacao, mascote, n_titulos, caminho_imagem)
             messagebox.showinfo("Resultado", resultado)
 
-        tk.Button(window, text="Inserir", command=submit).grid(row=5, column=0, columnspan=2)
+        tk.Button(window, text="Inserir", command=submit).grid(row=6, column=0, columnspan=2)
 
     def open_selecionar_time(self):
         window = tk.Toplevel(self.root)
