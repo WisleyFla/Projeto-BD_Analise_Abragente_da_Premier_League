@@ -36,12 +36,132 @@ Este projeto tem como objetivo desenvolver um Sistema de gerenciamento da premie
 
     Se você encontrar problemas ou bugs, por favor, abra uma issue em nosso repositório.
 
-# Tecnologias utilizada nesse projeto
+# 💻 Tecnologias utilizada nesse projeto
 Phyton Tkinter e Postegresql
 
-# Instalando da biblioteca phyton para o front
+# 💻 Instalando da biblioteca phyton para o front
+As bibliotecas mais comuns para criação de interfaces gráficas são tkinter (já vem instalada com o Python), PyQt5, PySide2, e Kivy. Vou cobrir a instalação de cada uma delas.
+1. Tkinter
+    O tkinter já vem instalado com o Python, então você não precisa instalar nada adicionalmente. Você pode começar a usá-lo diretamente.
 
-# Instalação do PostgreSQL (Sistema de Gerenciamento de Banco de Dados)
+Exemplo de uso:
+import tkinter as tk
+
+root = tk.Tk()
+root.title("Minha Aplicação")
+root.geometry("300x200")
+
+label = tk.Label(root, text="Olá, Tkinter!")
+label.pack()
+
+root.mainloop()
+
+2. PyQt5
+
+    O PyQt5 é uma biblioteca poderosa para criar interfaces gráficas. Para instalá-la, use o pip.
+
+Passo a passo:
+
+    Abra o terminal ou prompt de comando.
+
+    Execute o seguinte comando:
+    bash
+
+    pip install PyQt5
+
+Exemplo de uso:
+
+from PyQt5.QtWidgets import QApplication, QLabel, QWidget
+
+app = QApplication([])
+window = QWidget()
+window.setWindowTitle("Minha Aplicação")
+window.setGeometry(100, 100, 300, 200)
+
+label = QLabel("Olá, PyQt5!", window)
+label.move(100, 80)
+
+window.show()
+app.exec_()
+
+3. PySide2
+
+    O PySide2 é semelhante ao PyQt5, mas é mantido pela Qt Company. Para instalá-lo, use o pip.
+
+Passo a passo:
+
+    Abra o terminal ou prompt de comando.
+
+    Execute o seguinte comando:
+    bash
+
+    pip install PySide2
+
+Exemplo de uso:
+
+from PySide2.QtWidgets import QApplication, QLabel, QWidget
+
+app = QApplication([])
+window = QWidget()
+window.setWindowTitle("Minha Aplicação")
+window.setGeometry(100, 100, 300, 200)
+
+label = QLabel("Olá, PySide2!", window)
+label.move(100, 80)
+
+window.show()
+app.exec_()
+
+4. Kivy
+
+    O Kivy é uma biblioteca para criar interfaces gráficas multiplataforma, especialmente útil para aplicativos touch. Para instalá-lo, use o pip.
+
+Passo a passo:
+
+    Abra o terminal ou prompt de comando.
+
+    Execute o seguinte comando:
+    bash
+
+    pip install kivy
+
+Exemplo de uso:
+from kivy.app import App
+from kivy.uix.label import Label
+
+class MinhaApp(App):
+    def build(self):
+        return Label(text="Olá, Kivy!")
+
+if __name__ == "__main__":
+    MinhaApp().run()
+
+5. wxPython
+
+    O wxPython é outra biblioteca popular para criar interfaces gráficas. Para instalá-lo, use o pip.
+
+Passo a passo:
+
+    Abra o terminal ou prompt de comando.
+
+    Execute o seguinte comando:
+    bash
+    Copy
+
+    pip install wxPython
+
+Exemplo de uso:
+
+import wx
+
+app = wx.App(False)
+frame = wx.Frame(None, title="Minha Aplicação", size=(300, 200))
+panel = wx.Panel(frame)
+label = wx.StaticText(panel, label="Olá, wxPython!", pos=(100, 80))
+frame.Show(True)
+app.MainLoop()
+
+# 💻 Instalação do PostgreSQL (Sistema de Gerenciamento de Banco de Dados)
 Instalando o PostgreSQL
 
 Para instalar o postgresql no linux basta executar o seguinte comando:
@@ -80,7 +200,7 @@ Para sair do terminal do PostgreSQL digite o comando
 
 \q
 
-# Guia de Uso do Docker com PostgreSQL
+# 📙 Guia de Uso do Docker com PostgreSQL
 Pré-requisitos
 
     Docker instalado em seu sistema.
@@ -124,26 +244,37 @@ docker-compose down
 
 Isso desligará e removerá o contêiner PostgreSQL. Certifique-se de que nenhum dado importante seja perdido antes de executar este comando.
 
-# Frontend
-Iniciando o nextjs
+# 💻 Frontend
+    Como o tkinter já vem instalado com o Python, você só precisa criar um arquivo Python (por exemplo, app_tkinter.py) com o código fornecido e executá-lo.
 
-antes de tudo é preciso ter o node instalado na máquina como é mostrado acima.
-Rodando o projeto
+Passo a passo:
 
-para rodar o frontend do projeto basta instalar as dependências e rodar o servidor utilizando esses comandos:
+    Crie um arquivo chamado app_tkinter.py e cole o código abaixo:
 
-npm i
-npm run dev
+    import tkinter as tk
 
-basta isso, se estiver tudo certo.
+    root = tk.Tk()
+    root.title("Minha Aplicação")
+    root.geometry("300x200")
 
-# Backend
+    label = tk.Label(root, text="Olá, Tkinter!")
+    label.pack()
+
+    root.mainloop()
+
+    Abra o terminal ou prompt de comando.
+
+    Navegue até o diretório onde o arquivo app_tkinter.py está salvo.
+
+    Execute o comando:
+    bash
+
+    python app_tkinter.py
+
+# 💻 Backend
 Instale as dependências
 
 $ npm install
 
-Rodando a aplicação
 
-# development
-$ npm run start
 
