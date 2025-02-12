@@ -2,74 +2,46 @@
 # Trabalho de banco de dados
 - Professora: Maristela Holanda;
 - Alunos: Lucas, Ricardo, Valeria e Wisley
-- 
-# ⚙️ Sistema de Gerenciamento de Livros e Materiais Didáticos
+  
+# ⚙️ Sistema de Gerenciamento da Premier League
 
-Este projeto tem como objetivo desenvolver um Sistema de Informação dedicado ao gerenciamento de livros de ensino e materiais didáticos em um laboratório. Com a finalidade de atender tanto estudantes quanto professores, nosso sistema permitirá o acesso organizado e o empréstimo desses recursos por meio de uma plataforma computacional.
-✅ Funcionalidades Principais
+Este projeto tem como objetivo desenvolver um Sistema de gerenciamento da premier league onde permite cadastrar, deletar, inserir e atualizar as entidades, elenco, time e funcionario
 
-    📚 Cadastro de Livros e Materiais Didáticos: Os administradores do sistema poderão inserir informações detalhadas sobre os livros e materiais disponíveis no laboratório.
+# ✅ Funcionalidades Principais
 
-    🔍 Pesquisa e Consulta: Todos os usuários terão a capacidade de buscar e visualizar informações sobre os recursos educacionais disponíveis.
+ - Cadastro de time;
+ - Deletar time;
+ - Atualizar seu time;
+ - Inserir escudo de seu time;
 
-    🔄 Empréstimo e Devolução: Membros do laboratório poderão solicitar o empréstimo de livros e materiais, com um sistema de controle de prazo de devolução.
+ - Cadastro de funcionario;
+ - Deletar funcionario
+ - Atualizar funcionario;
 
-    🔒 Níveis de Acesso: O sistema será projetado com diferentes níveis de acesso, garantindo que apenas membros autorizados possam realizar empréstimos.
+ - Cadastro de elenco;
+ - Deletar elenco;
+ - Atualizar elenco;
 
-🏗️ Estrutura do Projeto
+# 🏗️ Estrutura do Projeto
 
-    📊 Regras de Negócio: As regras de negócio definem as diretrizes e políticas que regem o funcionamento do sistema, incluindo quem pode acessar, como os empréstimos são autorizados e quais são as políticas de devolução.
+    📊 Regras de Negócio: As regras de negócio definem as diretrizes e políticas que regem o funcionamento do sistema.
 
-    💾 Banco de Dados: Uma parte essencial deste projeto é a definição do banco de dados, que armazenará informações cruciais sobre os recursos educacionais, incluindo detalhes sobre os livros, disponibilidade e histórico de empréstimos.
+    💾 Banco de Dados: Uma parte essencial deste projeto é a definição do banco de dados, que armazenará informações cruciais sobre os recursos como: datalhes do time, nomes, sobre os funcionarios, nome, departamento, idade e etc, e nos times os nomes, imagem, mascote e etc.
 
     💻 Interface de Usuário: A interface será projetada de forma intuitiva, permitindo uma fácil navegação para todos os tipos de usuários.
 
-🚀 Como Contribuir
+# 🚀 Como Contribuir
 
     Para contribuir com este projeto, siga as diretrizes de contribuição no arquivo CONTRIBUTING.md.
 
     Se você encontrar problemas ou bugs, por favor, abra uma issue em nosso repositório.
 
-Tecnologias utilizada nesse projeto
-nestjs 	nextjs 	knexjs 	nodejs 	postgresql
-10.1 	13.5 	2.5 	lts 	15.4
-Configuração do ambiente
-1. Instalação do NVM (Node Version Manager) e Node.js (Linux)
-Atualizar o Sistema
+# Tecnologias utilizada nesse projeto
+Phyton Tkinter e Postegresql
 
-Antes de começar, é uma boa prática atualizar os pacotes do sistema. Abra um terminal e execute os seguintes comandos:
+# Instalando da biblioteca phyton para o front
 
-sudo apt update
-sudo apt upgrade
-
-Instalando o NVM (Node Version Manager)
-
-Nessa etapa podemos usar dois métodos para baixar e instalar o NVM, o curl e o wget eles ficaram disponíveis para que você possa escolher o seu método.
-
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-
-wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-
-Após isso feche e reabra o terminal
-Verifique a instalação do NVM
-
-Verifique se o nvm foi instalado corretamente digitando:
-
-nvm --version
-
-Deve ser apresentado a versão atual do nvm.
-Instalando o Node.js
-
-Com o nvm instalado podemos agora fazer a instalação de diversas versões do Node.js por exemplo a versão mais atual, a LTS por meio do comando:
-
-nvm install --lts
-
-Após isso verifique a versão do Node.js através do comando:
-
-node --version
-
-Deve ser apresentado a versão LTS do Node.js.
-2. Instalação do PostgreSQL (Sistema de Gerenciamento de Banco de Dados)
+# Instalação do PostgreSQL (Sistema de Gerenciamento de Banco de Dados)
 Instalando o PostgreSQL
 
 Para instalar o postgresql no linux basta executar o seguinte comando:
@@ -108,7 +80,7 @@ Para sair do terminal do PostgreSQL digite o comando
 
 \q
 
-2.1 Guia de Uso do Docker com PostgreSQL
+# Guia de Uso do Docker com PostgreSQL
 Pré-requisitos
 
     Docker instalado em seu sistema.
@@ -151,7 +123,8 @@ Quando você terminar de trabalhar com o banco de dados, você pode parar e remo
 docker-compose down
 
 Isso desligará e removerá o contêiner PostgreSQL. Certifique-se de que nenhum dado importante seja perdido antes de executar este comando.
-Frontend
+
+# Frontend
 Iniciando o nextjs
 
 antes de tudo é preciso ter o node instalado na máquina como é mostrado acima.
@@ -163,7 +136,8 @@ npm i
 npm run dev
 
 basta isso, se estiver tudo certo.
-Backend
+
+# Backend
 Instale as dependências
 
 $ npm install
@@ -173,35 +147,3 @@ Rodando a aplicação
 # development
 $ npm run start
 
-About
-
-trabalho de banco de dados da faculdade
-Resources
-Readme
-License
-MIT license
-Activity
-Stars
-2 stars
-Watchers
-1 watching
-Forks
-1 fork
-Report repository
-Releases
-No releases published
-Packages
-No packages published
-Contributors 5
-
-    @Barbosa885
-    @Thisgo1
-    @AnaBeatrizPontes
-    @lucsap
-    @hidekitomiyama
-
-Languages
-
-TypeScript 86.1%
-CSS 13.8%
-JavaScript 0.1%
