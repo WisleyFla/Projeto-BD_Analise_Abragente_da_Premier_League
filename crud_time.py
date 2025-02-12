@@ -5,58 +5,53 @@ class CRUDTime:
         self.connection = conecta_bd()
         self.cursor = self.connection.cursor()
 
-    def inserir(self, sigla, nome_clube, fundacao, mascote, n_titulos):
+    def inserir(self, sigla, nome_clube, fundacao, mascote, n_titulos, caminho_imagem):
         try:
             cmd_insert = """
-                INSERT INTO time (sigla, nome_clube, fundacao, mascote, n_titulos)
-                VALUES (%s, %s, %s, %s, %s)
+                INSERT INTO time (sigla, nome_clube, fundacao, mascote, n_titulos, caminho_imagem)
+                VALUES (%s, %s, %s, %s, %s, %s)
             """
-            valores = (sigla, nome_clube, fundacao, mascote, n_titulos)
+            valores = (sigla, nome_clube, fundacao, mascote, n_titulos, caminho_imagem)
             self.cursor.execute(cmd_insert, valores)
             self.connection.commit()
-            return "Dados inseridos com sucesso!"
-        except psycopg2.Error as err:
-            return f"Erro ao inserir dados: {err}"
+            return "Time inserido com sucesso!"
+        except Exception as err:
+            return f"Erro ao inserir time: {err}"
 
-    def selecionar(self, sigla=None, nome_clube=None):
+    def deletar(self, sigla):
         try:
-            cmd_select = "SELECT * FROM time"
-            if sigla or nome_clube:
-                cmd_select += " WHERE "
-                conditions = []
-                if sigla:
-                    conditions.append(f"sigla = %s")
-                if nome_clube:
-                    conditions.append(f"nome_clube = %s")
-                cmd_select += " AND ".join(conditions)
-            valores = tuple(filter(None, [sigla, nome_clube]))
-            self.cursor.execute(cmd_select, valores)
-            return self.cursor.fetchall()
-        except psycopg2.Error as err:
-            return f"Erro ao selecionar dados: {err}"
+            cmd_delete = "DELETE FROM time WHERE sigla = %s"
+            self.cursor.execute(cmd_delete, (sigla,))
+            self.connection.commit()
+            return "Time deletado com sucesso!"
+        except Exception as err:
+            return f"Erro ao deletar time: {err}"
 
-    def atualizar(self, sigla, nome_clube, mascote, n_titulos, nome_original):
+    def atualizar(self, sigla, nome_clube, fundacao, mascote, n_titulos):
         try:
             cmd_update = """
                 UPDATE time
-                SET sigla = %s, nome_clube = %s, mascote = %s, n_titulos = %s
-                WHERE nome_clube = %s
+                SET nome_clube = %s, fundacao = %s, mascote = %s, n_titulos = %s
+                WHERE sigla = %s
             """
-            valores = (sigla, nome_clube, mascote, n_titulos, nome_original)
+            valores = (nome_clube, fundacao, mascote, n_titulos, sigla)
             self.cursor.execute(cmd_update, valores)
             self.connection.commit()
-            return "Dados atualizados com sucesso!"
-        except psycopg2.Error as err:
-            return f"Erro ao atualizar dados: {err}"
+            return "Time atualizado com sucesso!"
+        except Exception as err:
+            return f"Erro ao atualizar time: {err}"
 
-    def deletar(self, nome_clube):
+    def selecionar(self, sigla=None):
         try:
-            cmd_delete = "DELETE FROM time WHERE nome_clube = %s"
-            self.cursor.execute(cmd_delete, (nome_clube,))
-            self.connection.commit()
-            return "Dados deletados com sucesso!"
-        except psycopg2.Error as err:
-            return f"Erro ao deletar dados: {err}"
+            cmd_select = "SELECT * FROM time"
+            if sigla:
+                cmd_select += " WHERE sigla = %s"
+                self.cursor.execute(cmd_select, (sigla,))
+            else:
+                self.cursor.execute(cmd_select)
+            return self.cursor.fetchall()
+        except Exception as err:
+            return f"Erro ao selecionar time: {err}"
 
     def __del__(self):
         encerra_conn(self.connection)

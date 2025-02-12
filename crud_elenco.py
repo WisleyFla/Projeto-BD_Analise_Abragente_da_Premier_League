@@ -15,25 +15,16 @@ class CRUDElenco:
             self.cursor.execute(cmd_insert, valores)
             self.connection.commit()
             return "Dados inseridos com sucesso!"
-        except psycopg2.Error as err:
+        except Exception as err:
             return f"Erro ao inserir dados: {err}"
-
-    def selecionar(self, nome_jogador=None, sigla_posicao=None):
+    def deletar(self, id_jogador):
         try:
-            cmd_select = "SELECT * FROM elenco"
-            if nome_jogador or sigla_posicao:
-                cmd_select += " WHERE "
-                conditions = []
-                if nome_jogador:
-                    conditions.append(f"nome_jogador = %s")
-                if sigla_posicao:
-                    conditions.append(f"sigla_posicao = %s")
-                cmd_select += " AND ".join(conditions)
-            valores = tuple(filter(None, [nome_jogador, sigla_posicao]))
-            self.cursor.execute(cmd_select, valores)
-            return self.cursor.fetchall()
-        except psycopg2.Error as err:
-            return f"Erro ao selecionar dados: {err}"
+            cmd_delete = "DELETE FROM elenco WHERE id_jogador = %s"
+            self.cursor.execute(cmd_delete, (id_jogador,))
+            self.connection.commit()
+            return "Jogador deletado com sucesso!"
+        except Exception as err:
+            return f"Erro ao deletar jogador: {err}"
 
     def atualizar(self, id_jogador, nome_jogador, idade, valor_mercado, sigla, sigla_posicao):
         try:
@@ -45,18 +36,20 @@ class CRUDElenco:
             valores = (nome_jogador, idade, valor_mercado, sigla, sigla_posicao, id_jogador)
             self.cursor.execute(cmd_update, valores)
             self.connection.commit()
-            return "Dados atualizados com sucesso!"
-        except psycopg2.Error as err:
-            return f"Erro ao atualizar dados: {err}"
+            return "Jogador atualizado com sucesso!"
+        except Exception as err:
+            return f"Erro ao atualizar jogador: {err}"
 
-    def deletar(self, nome_jogador):
+    def selecionar(self, id_jogador=None):
         try:
-            cmd_delete = "DELETE FROM elenco WHERE nome_jogador = %s"
-            self.cursor.execute(cmd_delete, (nome_jogador,))
-            self.connection.commit()
-            return "Dados deletados com sucesso!"
-        except psycopg2.Error as err:
-            return f"Erro ao deletar dados: {err}"
-
+            cmd_select = "SELECT * FROM elenco"
+            if id_jogador:
+                cmd_select += " WHERE id_jogador = %s"
+                self.cursor.execute(cmd_select, (id_jogador,))
+            else:
+                self.cursor.execute(cmd_select)
+            return self.cursor.fetchall()
+        except Exception as err:
+            return f"Erro ao selecionar jogador: {err}"
     def __del__(self):
         encerra_conn(self.connection)

@@ -13,13 +13,14 @@ CREATE TABLE Departamentos (
     Nome_departamento VARCHAR(50) NOT NULL
 );
 
--- Criação da Tabela Funcionarios
+-- Criação da Tabela Funcionarios 
 CREATE TABLE Funcionarios (
     Matricula SERIAL PRIMARY KEY,
     Nome_funcionario VARCHAR(100) NOT NULL,
     Idade INT CHECK (Idade > 0),
     Profissao VARCHAR(50) NOT NULL,
-    SIGLA_departamento VARCHAR(10) REFERENCES Departamentos(SIGLA_departamento) ON DELETE SET NULL
+    SIGLA_departamento VARCHAR(10) REFERENCES Departamentos(SIGLA_departamento) ON DELETE SET NULL,
+    Sigla_time VARCHAR(3) REFERENCES Time(Sigla) ON DELETE SET NULL
 );
 
 -- Criação da Tabela Posicao
@@ -812,91 +813,130 @@ INSERT INTO Classificacao (Sigla, Pontos, Vitoria, Empate, Derrota, Saldo_Gols, 
 
 -- Tabela funcionarios:
 
-INSERT INTO Funcionarios (Nome_funcionario, Idade, Profissao, SIGLA_departamento) VALUES
+INSERT INTO Funcionarios (Nome_funcionario, Idade, Profissao, SIGLA_departamento, Sigla_time) VALUES
 -- Departamento de Futebol
-('Carlos Eduardo', 45, 'Técnico', 'Futebol'),
-('Marcos Silva', 38, 'Auxiliar Técnico', 'Futebol'),
-('Fernando Souza', 50, 'Preparador Físico', 'Futebol'),
-('José Ricardo', 42, 'Treinador de Goleiros', 'Futebol'),
-('Luiz Felipe', 39, 'Analista de Desempenho', 'Futebol'),
-('Paulo César', 47, 'Massagista', 'Futebol'),
-('Bruno Mendes', 41, 'Coordenador Técnico', 'Futebol'),
-('Rafael Cardoso', 35, 'Scout', 'Futebol'),
-('Thiago Santos', 40, 'Supervisor Técnico', 'Futebol'),
-('Diego Ferreira', 33, 'Treinador Sub-20', 'Futebol'),
-('Lucas Moura', 44, 'Preparador Físico Sub-20', 'Futebol'),
-('Vinícius Almeida', 38, 'Observador Técnico', 'Futebol'),
-('Anderson Costa', 43, 'Coordenador da Base', 'Futebol'),
-('Fábio Lima', 37, 'Psicólogo Esportivo', 'Futebol'),
-('Eduardo Tavares', 46, 'Gerente de Futebol', 'Futebol'),
-('Gustavo Nogueira', 48, 'Gestor de Contratações', 'Futebol'),
-('Alexandre Santos', 36, 'Olheiro', 'Futebol'),
-('João Pedro', 32, 'Tático', 'Futebol'),
-('Henrique Lima', 45, 'Preparador de Condicionamento', 'Futebol'),
-('Carlos Santana', 39, 'Analista de Jogadas', 'Futebol'),
+('Carlos Eduardo', 45, 'Técnico', 'Futebol', 'ARS'),
+('Marcos Silva', 38, 'Auxiliar Técnico', 'Futebol', 'MCI'),
+('Fernando Souza', 50, 'Preparador Físico', 'Futebol', 'MUN'),
+('José Ricardo', 42, 'Treinador de Goleiros', 'Futebol', 'LIV'),
+('Luiz Felipe', 39, 'Analista de Desempenho', 'Futebol', 'CHE'),
+('Paulo César', 47, 'Massagista', 'Futebol', 'TOT'),
+('Bruno Mendes', 41, 'Coordenador Técnico', 'Futebol', 'NEW'),
+('Rafael Cardoso', 35, 'Scout', 'Futebol', 'AST'),
+('Thiago Santos', 40, 'Supervisor Técnico', 'Futebol', 'WHU'),
+('Diego Ferreira', 33, 'Treinador Sub-20', 'Futebol', 'BHA'),
+('Lucas Moura', 44, 'Preparador Físico Sub-20', 'Futebol', 'BRE'),
+('Vinícius Almeida', 38, 'Observador Técnico', 'Futebol', 'FUL'),
+('Anderson Costa', 43, 'Coordenador da Base', 'Futebol', 'CRY'),
+('Fábio Lima', 37, 'Psicólogo Esportivo', 'Futebol', 'BOU'),
+('Eduardo Tavares', 46, 'Gerente de Futebol', 'Futebol', 'WOL'),
+('Gustavo Nogueira', 48, 'Gestor de Contratações', 'Futebol', 'EVE'),
+('Alexandre Santos', 36, 'Olheiro', 'Futebol', 'NFO'),
+('João Pedro', 32, 'Tático', 'Futebol', 'BUR'),
+('Henrique Lima', 45, 'Preparador de Condicionamento', 'Futebol', 'SHE'),
+('Carlos Santana', 39, 'Analista de Jogadas', 'Futebol', 'LUT'),
 
 -- Departamento de Marketing
-('Ana Paula', 32, 'Gerente de Marketing', 'Marketing'),
-('Ricardo Mendes', 40, 'Analista de Mídia', 'Marketing'),
-('Juliana Castro', 29, 'Social Media', 'Marketing'),
-('Vanessa Oliveira', 34, 'Coordenadora de Comunicação', 'Marketing'),
-('Cláudio Ramos', 37, 'Gerente de Publicidade', 'Marketing'),
-('Fernanda Martins', 28, 'Redatora Publicitária', 'Marketing'),
-('Thiago Lopes', 31, 'Designer Gráfico', 'Marketing'),
-('Isabela Souza', 30, 'Fotógrafa', 'Marketing'),
-('Lucas Ribeiro', 35, 'Produtor Audiovisual', 'Marketing'),
-('Camila Dias', 27, 'Estrategista Digital', 'Marketing'),
-('Gabriela Alves', 29, 'Especialista em SEO', 'Marketing'),
-('Eduardo Teixeira', 41, 'Diretor de Comunicação', 'Marketing'),
-('Roberta Nunes', 33, 'Executiva de Patrocínios', 'Marketing'),
-('Fábio Oliveira', 38, 'Planejador de Campanhas', 'Marketing'),
-('Beatriz Souza', 36, 'Analista de Redes Sociais', 'Marketing'),
-('Renato Farias', 39, 'Gerente de Relacionamento com a Torcida', 'Marketing'),
-('Luciana Torres', 28, 'Produtora de Conteúdo', 'Marketing'),
-('Bruno Santiago', 30, 'Coordenador de Eventos', 'Marketing'),
-('Camila Freitas', 29, 'Assessora de Imprensa', 'Marketing'),
-('Pedro Henrique', 32, 'Fotógrafo de Campo', 'Marketing'),
+('Ana Paula', 32, 'Gerente de Marketing', 'Marketing', 'ARS'),
+('Ricardo Mendes', 40, 'Analista de Mídia', 'Marketing', 'MCI'),
+('Juliana Castro', 29, 'Social Media', 'Marketing', 'MUN'),
+('Vanessa Oliveira', 34, 'Coordenadora de Comunicação', 'Marketing', 'LIV'),
+('Cláudio Ramos', 37, 'Gerente de Publicidade', 'Marketing', 'CHE'),
+('Fernanda Martins', 28, 'Redatora Publicitária', 'Marketing', 'TOT'),
+('Thiago Lopes', 31, 'Designer Gráfico', 'Marketing', 'NEW'),
+('Isabela Souza', 30, 'Fotógrafa', 'Marketing', 'AST'),
+('Lucas Ribeiro', 35, 'Produtor Audiovisual', 'Marketing', 'WHU'),
+('Camila Dias', 27, 'Estrategista Digital', 'Marketing', 'BHA'),
+('Gabriela Alves', 29, 'Especialista em SEO', 'Marketing', 'BRE'),
+('Eduardo Teixeira', 41, 'Diretor de Comunicação', 'Marketing', 'FUL'),
+('Roberta Nunes', 33, 'Executiva de Patrocínios', 'Marketing', 'CRY'),
+('Fábio Oliveira', 38, 'Planejador de Campanhas', 'Marketing', 'BOU'),
+('Beatriz Souza', 36, 'Analista de Redes Sociais', 'Marketing', 'WOL'),
+('Renato Farias', 39, 'Gerente de Relacionamento com a Torcida', 'Marketing', 'EVE'),
+('Luciana Torres', 28, 'Produtora de Conteúdo', 'Marketing', 'NFO'),
+('Bruno Santiago', 30, 'Coordenador de Eventos', 'Marketing', 'BUR'),
+('Camila Freitas', 29, 'Assessora de Imprensa', 'Marketing', 'SHE'),
+('Pedro Henrique', 32, 'Fotógrafo de Campo', 'Marketing', 'LUT'),
 
 -- Departamento Financeiro
-('Roberto Lima', 52, 'Diretor Financeiro', 'Financeiro'),
-('Mariana Alves', 37, 'Analista Contábil', 'Financeiro'),
-('Paulo Henrique', 41, 'Tesoureiro', 'Financeiro'),
-('Bruno Almeida', 40, 'Gerente de Finanças', 'Financeiro'),
-('Rodrigo Martins', 45, 'Analista de Custos', 'Financeiro'),
-('Daniel Souza', 39, 'Controlador Financeiro', 'Financeiro'),
-('Fernanda Lopes', 31, 'Analista de Planejamento', 'Financeiro'),
-('Carla Mendes', 35, 'Consultora Financeira', 'Financeiro'),
-('Lucas Tavares', 50, 'Auditor Interno', 'Financeiro'),
-('Tatiane Borges', 44, 'Contadora', 'Financeiro'),
-('Ricardo Farias', 37, 'Especialista em Investimentos', 'Financeiro'),
-('Alex Nascimento', 46, 'Gerente de Orçamentos', 'Financeiro'),
-('Beatriz Mendes', 38, 'Analista de Pagamentos', 'Financeiro'),
-('João Batista', 42, 'Analista Fiscal', 'Financeiro'),
-('Renata Lima', 30, 'Supervisora de Contas', 'Financeiro'),
-('Patrícia Castro', 29, 'Analista de Recebíveis', 'Financeiro'),
-('Carlos Ramos', 41, 'Coordenador Financeiro', 'Financeiro'),
-('Eduardo Santos', 47, 'Analista de Contratos', 'Financeiro'),
-('Mateus Oliveira', 35, 'Gestor de Recursos', 'Financeiro'),
-('Daniel Rocha', 43, 'Analista de Gestão de Riscos', 'Financeiro'),
+('Roberto Lima', 52, 'Diretor Financeiro', 'Financeiro', 'ARS'),
+('Mariana Alves', 37, 'Analista Contábil', 'Financeiro', 'MCI'),
+('Paulo Henrique', 41, 'Tesoureiro', 'Financeiro', 'MUN'),
+('Bruno Almeida', 40, 'Gerente de Finanças', 'Financeiro', 'LIV'),
+('Rodrigo Martins', 45, 'Analista de Custos', 'Financeiro', 'CHE'),
+('Daniel Souza', 39, 'Controlador Financeiro', 'Financeiro', 'TOT'),
+('Fernanda Lopes', 31, 'Analista de Planejamento', 'Financeiro', 'NEW'),
+('Carla Mendes', 35, 'Consultora Financeira', 'Financeiro', 'AST'),
+('Lucas Tavares', 50, 'Auditor Interno', 'Financeiro', 'WHU'),
+('Tatiane Borges', 44, 'Contadora', 'Financeiro', 'BHA'),
+('Ricardo Farias', 37, 'Especialista em Investimentos', 'Financeiro', 'BRE'),
+('Alex Nascimento', 46, 'Gerente de Orçamentos', 'Financeiro', 'FUL'),
+('Beatriz Mendes', 38, 'Analista de Pagamentos', 'Financeiro', 'CRY'),
+('João Batista', 42, 'Analista Fiscal', 'Financeiro', 'BOU'),
+('Renata Lima', 30, 'Supervisora de Contas', 'Financeiro', 'WOL'),
+('Patrícia Castro', 29, 'Analista de Recebíveis', 'Financeiro', 'EVE'),
+('Carlos Ramos', 41, 'Coordenador Financeiro', 'Financeiro', 'NFO'),
+('Eduardo Santos', 47, 'Analista de Contratos', 'Financeiro', 'BUR'),
+('Mateus Oliveira', 35, 'Gestor de Recursos', 'Financeiro', 'SHE'),
+('Daniel Rocha', 43, 'Analista de Gestão de Riscos', 'Financeiro', 'LUT'),
 
 -- Departamento Médico
-('Dra. Camila Rezende', 48, 'Médica do Clube', 'Médico'),
-('Dr. João Peixoto', 50, 'Fisioterapeuta', 'Médico'),
-('Carla Rodrigues', 34, 'Nutricionista', 'Médico'),
-('Marcelo Duarte', 42, 'Preparador Físico Médico', 'Médico'),
-('Fernanda Sampaio', 39, 'Coordenadora Médica', 'Médico'),
-('Lucas Farias', 36, 'Ortopedista', 'Médico'),
-('Rafaela Silva', 32, 'Psicóloga Esportiva', 'Médico'),
-('Eduardo Campos', 45, 'Massagista', 'Médico'),
-('Bruna Oliveira', 31, 'Terapeuta Ocupacional', 'Médico'),
-('Guilherme Costa', 38, 'Fisiologista', 'Médico'),
-('Vinícius Rocha', 44, 'Especialista em Reabilitação', 'Médico'),
-('Fernanda Souza', 33, 'Enfermeira Esportiva', 'Médico'),
-('Rodrigo Pereira', 41, 'Cardiologista', 'Médico'),
-('Jéssica Mendes', 37, 'Nutricionista Clínica', 'Médico'),
-('Henrique Nunes', 46, 'Médico de Emergência', 'Médico'),
-('Gustavo Amaral', 48, 'Supervisor Médico', 'Médico'),
-('Lucas Carvalho', 35, 'Fisioterapeuta Sub-20', 'Médico'),
-('Roberta Andrade', 39, 'Neurocientista do Esporte', 'Médico'),
-('Ricardo Pacheco', 50, 'Analista de Saúde Esportiva', 'Médico'),
-('Marcelo Antunes', 43, 'Terapeuta Físico', 'Médico');
+('Dra. Camila Rezende', 48, 'Médica do Clube', 'Médico', 'ARS'),
+('Dr. João Peixoto', 50, 'Fisioterapeuta', 'Médico', 'MCI'),
+('Carla Rodrigues', 34, 'Nutricionista', 'Médico', 'MUN'),
+('Marcelo Duarte', 42, 'Preparador Físico Médico', 'Médico', 'LIV'),
+('Fernanda Sampaio', 39, 'Coordenadora Médica', 'Médico', 'CHE'),
+('Lucas Farias', 36, 'Ortopedista', 'Médico', 'TOT'),
+('Rafaela Silva', 32, 'Psicóloga Esportiva', 'Médico', 'NEW'),
+('Eduardo Campos', 45, 'Massagista', 'Médico', 'AST'),
+('Bruna Oliveira', 31, 'Terapeuta Ocupacional', 'Médico', 'WHU'),
+('Guilherme Costa', 38, 'Fisiologista', 'Médico', 'BHA'),
+('Vinícius Rocha', 44, 'Especialista em Reabilitação', 'Médico', 'BRE'),
+('Fernanda Souza', 33, 'Enfermeira Esportiva', 'Médico', 'FUL'),
+('Rodrigo Pereira', 41, 'Cardiologista', 'Médico', 'CRY'),
+('Jéssica Mendes', 37, 'Nutricionista Clínica', 'Médico', 'BOU'),
+('Henrique Nunes', 46, 'Médico de Emergência', 'Médico', 'WOL'),
+('Gustavo Amaral', 48, 'Supervisor Médico', 'Médico', 'EVE'),
+('Lucas Carvalho', 35, 'Fisioterapeuta Sub-20', 'Médico', 'NFO'),
+('Roberta Andrade', 39, 'Neurocientista do Esporte', 'Médico', 'BUR'),
+('Ricardo Pacheco', 50, 'Analista de Saúde Esportiva', 'Médico', 'SHE'),
+('Marcelo Antunes', 43, 'Terapeuta Físico', 'Médico', 'LUT');
+
+CREATE OR REPLACE PROCEDURE AtualizarTitulosTime(
+    IN sigla_time VARCHAR(10),
+    IN novos_titulos INT
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    -- Atualiza o número de títulos do time
+    UPDATE Time
+    SET N_Titulos = novos_titulos
+    WHERE Sigla = sigla_time;
+
+    -- Verifica se a atualização foi bem-sucedida
+    IF FOUND THEN
+        RAISE NOTICE 'Número de títulos do time % atualizado para %.', sigla_time, novos_titulos;
+    ELSE
+        RAISE NOTICE 'Time com sigla % não encontrado.', sigla_time;
+    END IF;
+END;
+$$;
+
+CREATE OR REPLACE VIEW ClassificacaoDetalhada AS
+SELECT
+    T.Sigla,
+    T.Nome_clube,
+    C.Pontos,
+    C.Vitoria,
+    C.Empate,
+    C.Derrota,
+    C.Saldo_Gols,
+    C.Gols_feitos,
+    C.Gols_sofridos
+FROM
+    Classificacao C
+JOIN
+    Time T ON C.Sigla = T.Sigla
+ORDER BY
+    C.Pontos DESC;
