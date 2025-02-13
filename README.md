@@ -56,30 +56,30 @@ Exemplo de uso:
     
     root.mainloop()
 
-2. Pyscopg2
+2. PyQt6 (Interface Gráfica Moderna)
 
-   É uma biblioteca Python para interagir com bancos de dados PostgreSQL, permitindo a execução de comandos SQL e a manipulação de dados diretamente.
+PyQt6 é uma biblioteca poderosa para criar interfaces gráficas modernas e profissionais.
 
 Passo a passo:
 Abra o terminal ou prompt de comando.
 Execute o seguinte comando:
-    bash
-    pip install psycopg2
+     bash
+    pip install psycopg26
     
-    Exemplo de uso:
-    import psycopg2
+Exemplo de uso:
+     from PyQt6.QtWidgets import QApplication, QLabel, QWidget
+
+    app = QApplication([])
     
-    # Conectando ao banco de dados
-    conn = psycopg2.connect(dbname="nome_do_banco", user="usuario", password="senha", host="localhost")
+    window = QWidget()
+    window.setWindowTitle("Minha Aplicação")
+    window.setGeometry(100, 100, 300, 200)
     
-    # Criando um cursor e executando uma consulta
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM tabela")
-    print(cur.fetchall())
+    label = QLabel("Olá, PyQt6!", window)
+    label.move(100, 80)
     
-    # Fechando a conexão
-    cur.close()
-    conn.close()
+    window.show()
+    app.exec()
 
 3. dotenv
 
@@ -105,7 +105,7 @@ Execute o seguinte comando:
     from dotenv import load_dotenv
 
 # Carregar as variáveis de ambiente do arquivo .env
-load_dotenv()
+    load_dotenv()
 
 # Acessar variáveis de ambiente
 db_user = os.getenv("DB_USER")
@@ -119,8 +119,8 @@ print(f"Usuário: {db_user}, Senha: {db_password}")
 
 Como a biblioteca os é usada aqui:
 
-import os
-from dotenv import load_dotenv
+  import os
+  from dotenv import load_dotenv
 
 # Carrega as variáveis de ambiente do arquivo .env
     load_dotenv()
