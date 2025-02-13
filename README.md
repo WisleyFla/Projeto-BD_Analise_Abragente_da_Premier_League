@@ -40,7 +40,7 @@ Este projeto tem como objetivo desenvolver um Sistema de gerenciamento da premie
 Phyton Tkinter e Postegresql
 
 # 💻 Instalando da biblioteca phyton para o front
-As bibliotecas mais comuns para criação de interfaces gráficas são tkinter (já vem instalada com o Python), PyQt5, PySide2, e Kivy. Vou cobrir a instalação de cada uma delas.
+
 1. Tkinter
     O tkinter já vem instalado com o Python, então você não precisa instalar nada adicionalmente. Você pode começar a usá-lo diretamente.
 
@@ -56,37 +56,9 @@ label.pack()
 
 root.mainloop()
 
-2. PyQt5
+2. Pyscopg2
 
-    O PyQt5 é uma biblioteca poderosa para criar interfaces gráficas. Para instalá-la, use o pip.
-
-Passo a passo:
-
-    Abra o terminal ou prompt de comando.
-
-    Execute o seguinte comando:
-    bash
-
-    pip install PyQt5
-
-Exemplo de uso:
-
-from PyQt5.QtWidgets import QApplication, QLabel, QWidget
-
-app = QApplication([])
-window = QWidget()
-window.setWindowTitle("Minha Aplicação")
-window.setGeometry(100, 100, 300, 200)
-
-label = QLabel("Olá, PyQt5!", window)
-label.move(100, 80)
-
-window.show()
-app.exec_()
-
-3. PySide2
-
-    O PySide2 é semelhante ao PyQt5, mas é mantido pela Qt Company. Para instalá-lo, use o pip.
+   É uma biblioteca Python para interagir com bancos de dados PostgreSQL, permitindo a execução de comandos SQL e a manipulação de dados diretamente.
 
 Passo a passo:
 
@@ -95,26 +67,29 @@ Passo a passo:
     Execute o seguinte comando:
     bash
 
-    pip install PySide2
+   pip install psycopg2
+
 
 Exemplo de uso:
 
-from PySide2.QtWidgets import QApplication, QLabel, QWidget
+import psycopg2
 
-app = QApplication([])
-window = QWidget()
-window.setWindowTitle("Minha Aplicação")
-window.setGeometry(100, 100, 300, 200)
+# Conectando ao banco de dados
+conn = psycopg2.connect(dbname="nome_do_banco", user="usuario", password="senha", host="localhost")
 
-label = QLabel("Olá, PySide2!", window)
-label.move(100, 80)
+# Criando um cursor e executando uma consulta
+cur = conn.cursor()
+cur.execute("SELECT * FROM tabela")
+print(cur.fetchall())
 
-window.show()
-app.exec_()
+# Fechando a conexão
+cur.close()
+conn.close()
 
-4. Kivy
 
-    O Kivy é uma biblioteca para criar interfaces gráficas multiplataforma, especialmente útil para aplicativos touch. Para instalá-lo, use o pip.
+3. dotenv
+
+    O dotenv é uma biblioteca Python que permite carregar variáveis de ambiente de um arquivo .env para o seu código.
 
 Passo a passo:
 
@@ -123,9 +98,36 @@ Passo a passo:
     Execute o seguinte comando:
     bash
 
-    pip install kivy
+    pip install python-dotenv
+
 
 Exemplo de uso:
+
+"""Criação do arquivo .env: O arquivo .env deve ser colocado no mesmo diretório do seu código.
+DB_USER=meu_usuario
+DB_PASSWORD=minha_senha
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=meu_banco"""
+
+import os
+from dotenv import load_dotenv
+
+# Carregar as variáveis de ambiente do arquivo .env
+load_dotenv()
+
+# Acessar variáveis de ambiente
+db_user = os.getenv("DB_USER")
+db_password = os.getenv("DB_PASSWORD")
+print(f"Usuário: {db_user}, Senha: {db_password}")
+
+
+4. OS 
+
+   Biblioteca para acessar variáveis de ambiente e manipular o sistema de arquivos, já vem instalada.
+
+Como a biblioteca os é usada aqui:
+
 from kivy.app import App
 from kivy.uix.label import Label
 
