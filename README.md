@@ -24,17 +24,17 @@ Este projeto tem como objetivo desenvolver um Sistema de gerenciamento da premie
 
 # 🏗️ Estrutura do Projeto
 
-    📊 Regras de Negócio: As regras de negócio definem as diretrizes e políticas que regem o funcionamento do sistema.
+  📊 Regras de Negócio: As regras de negócio definem as diretrizes e políticas que regem o funcionamento do sistema.
 
-    💾 Banco de Dados: Uma parte essencial deste projeto é a definição do banco de dados, que armazenará informações cruciais sobre os recursos como: datalhes do time, nomes, sobre os funcionarios, nome, departamento, idade e etc, e nos times os nomes, imagem, mascote e etc.
+  💾 Banco de Dados: Uma parte essencial deste projeto é a definição do banco de dados, que armazenará informações cruciais sobre os recursos como: datalhes do time, nomes, sobre os funcionarios, nome, departamento, idade e etc, e nos times os nomes, imagem, mascote e etc.
 
-    💻 Interface de Usuário: A interface será projetada de forma intuitiva, permitindo uma fácil navegação para todos os tipos de usuários.
+  💻 Interface de Usuário: A interface será projetada de forma intuitiva, permitindo uma fácil navegação para todos os tipos de usuários.
 
 # 🚀 Como Contribuir
 
-    Para contribuir com este projeto, siga as diretrizes de contribuição no arquivo CONTRIBUTING.md.
-
-    Se você encontrar problemas ou bugs, por favor, abra uma issue em nosso repositório.
+  Para contribuir com este projeto, siga as diretrizes de contribuição no arquivo CONTRIBUTING.md.
+  
+  Se você encontrar problemas ou bugs, por favor, abra uma issue em nosso repositório.
 
 # 💻 Tecnologias utilizada nesse projeto
 Phyton Tkinter e Postegresql
@@ -45,73 +45,64 @@ Phyton Tkinter e Postegresql
     O tkinter já vem instalado com o Python, então você não precisa instalar nada adicionalmente. Você pode começar a usá-lo diretamente.
 
 Exemplo de uso:
-import tkinter as tk
-
-root = tk.Tk()
-root.title("Minha Aplicação")
-root.geometry("300x200")
-
-label = tk.Label(root, text="Olá, Tkinter!")
-label.pack()
-
-root.mainloop()
+    import tkinter as tk
+    
+    root = tk.Tk()
+    root.title("Minha Aplicação")
+    root.geometry("300x200")
+    
+    label = tk.Label(root, text="Olá, Tkinter!")
+    label.pack()
+    
+    root.mainloop()
 
 2. Pyscopg2
 
    É uma biblioteca Python para interagir com bancos de dados PostgreSQL, permitindo a execução de comandos SQL e a manipulação de dados diretamente.
 
 Passo a passo:
-
-    Abra o terminal ou prompt de comando.
-
-    Execute o seguinte comando:
+Abra o terminal ou prompt de comando.
+Execute o seguinte comando:
     bash
-
-   pip install psycopg2
-
-
-Exemplo de uso:
-
-import psycopg2
-
-# Conectando ao banco de dados
-conn = psycopg2.connect(dbname="nome_do_banco", user="usuario", password="senha", host="localhost")
-
-# Criando um cursor e executando uma consulta
-cur = conn.cursor()
-cur.execute("SELECT * FROM tabela")
-print(cur.fetchall())
-
-# Fechando a conexão
-cur.close()
-conn.close()
-
+    pip install psycopg2
+    
+    Exemplo de uso:
+    import psycopg2
+    
+    # Conectando ao banco de dados
+    conn = psycopg2.connect(dbname="nome_do_banco", user="usuario", password="senha", host="localhost")
+    
+    # Criando um cursor e executando uma consulta
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM tabela")
+    print(cur.fetchall())
+    
+    # Fechando a conexão
+    cur.close()
+    conn.close()
 
 3. dotenv
 
     O dotenv é uma biblioteca Python que permite carregar variáveis de ambiente de um arquivo .env para o seu código.
 
 Passo a passo:
-
-    Abra o terminal ou prompt de comando.
-
-    Execute o seguinte comando:
+Abra o terminal ou prompt de comando.
+Execute o seguinte comando:
     bash
-
     pip install python-dotenv
-
-
-Exemplo de uso:
-
-"""Criação do arquivo .env: O arquivo .env deve ser colocado no mesmo diretório do seu código.
-DB_USER=meu_usuario
-DB_PASSWORD=minha_senha
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=meu_banco"""
-
-import os
-from dotenv import load_dotenv
+    
+    
+    Exemplo de uso:
+    
+    """Criação do arquivo .env: O arquivo .env deve ser colocado no mesmo diretório do seu código.
+    DB_USER=meu_usuario
+    DB_PASSWORD=minha_senha
+    DB_HOST=localhost
+    DB_PORT=5432
+    DB_NAME=meu_banco"""
+    
+    import os
+    from dotenv import load_dotenv
 
 # Carregar as variáveis de ambiente do arquivo .env
 load_dotenv()
@@ -132,34 +123,32 @@ import os
 from dotenv import load_dotenv
 
 # Carrega as variáveis de ambiente do arquivo .env
-load_dotenv()
-
-def conecta_bd():
-    try:
-        conn = psycopg2.connect(
-            user=os.getenv("DB_USER"),  # Usuário do banco de dados
-            # os.getenv("DB_USER"): Aqui, a função tenta recuperar o valor da variável de ambiente chamada DB_USER, que deve conter o nome do usuário para a conexão com o banco de dados.
-            
-            password=os.getenv("DB_PASSWORD"),  # Senha do banco de dados
-            #os.getenv("DB_PASSWORD"): Da mesma forma, essa linha tenta recuperar o valor da variável de ambiente DB_PASSWORD, que contém a senha do banco de dados.
-            
-            host=os.getenv("DB_HOST"),  # Host do banco de dados
-            #os.getenv("DB_HOST"): A variável DB_HOST armazena o endereço do servidor do banco de dados (ex: localhost ou um IP remoto).
-            
-            port=os.getenv("DB_PORT"),  # Porta do banco de dados
-            #os.getenv("DB_PORT"): Aqui, o valor de DB_PORT é recuperado, geralmente a porta na qual o banco de dados PostgreSQL está escutando (ex: 5432).
-            
-            database=os.getenv("DB_NAME")  # Nome do banco de dados
-            #os.getenv("DB_NAME"): Por fim, essa linha acessa a variável DB_NAME, que contém o nome do banco de dados com o qual você deseja se conectar.
-            
-        )
-        print("Banco conectado com sucesso!!")
-        return conn
-    except Error as e:
-        print(f"Ocorreu um erro ao conectar ao banco: {e}")
-        return None
-
-
+    load_dotenv()
+    
+    def conecta_bd():
+        try:
+            conn = psycopg2.connect(
+                user=os.getenv("DB_USER"),  # Usuário do banco de dados
+                # os.getenv("DB_USER"): Aqui, a função tenta recuperar o valor da variável de ambiente chamada DB_USER, que deve conter o nome do usuário para a conexão com o banco de dados.
+                
+                password=os.getenv("DB_PASSWORD"),  # Senha do banco de dados
+                #os.getenv("DB_PASSWORD"): Da mesma forma, essa linha tenta recuperar o valor da variável de ambiente DB_PASSWORD, que contém a senha do banco de dados.
+                
+                host=os.getenv("DB_HOST"),  # Host do banco de dados
+                #os.getenv("DB_HOST"): A variável DB_HOST armazena o endereço do servidor do banco de dados (ex: localhost ou um IP remoto).
+                
+                port=os.getenv("DB_PORT"),  # Porta do banco de dados
+                #os.getenv("DB_PORT"): Aqui, o valor de DB_PORT é recuperado, geralmente a porta na qual o banco de dados PostgreSQL está escutando (ex: 5432).
+                
+                database=os.getenv("DB_NAME")  # Nome do banco de dados
+                #os.getenv("DB_NAME"): Por fim, essa linha acessa a variável DB_NAME, que contém o nome do banco de dados com o qual você deseja se conectar.
+                
+            )
+            print("Banco conectado com sucesso!!")
+            return conn
+        except Error as e:
+            print(f"Ocorreu um erro ao conectar ao banco: {e}")
+            return None
 
 
 # 💻 Instalação do PostgreSQL (Sistema de Gerenciamento de Banco de Dados)
@@ -204,8 +193,8 @@ Para sair do terminal do PostgreSQL digite o comando
 # 📙 Guia de Uso do Docker com PostgreSQL
 Pré-requisitos
 
-    Docker instalado em seu sistema.
-    Docker Compose (geralmente incluído com a instalação do Docker).
+Docker instalado em seu sistema.
+Docker Compose (geralmente incluído com a instalação do Docker).
 
 Configuração do Docker Compose
 
@@ -214,13 +203,13 @@ Iniciar o Banco de Dados PostgreSQL
 
 Abra um terminal e navegue até o diretório do projeto onde está o arquivo docker-compose.yml.
 
-    Para iniciar o contêiner PostgreSQL, execute o seguinte comando:
+Para iniciar o contêiner PostgreSQL, execute o seguinte comando:
 
 docker-compose up -d
 
 Isso criará e iniciará o contêiner PostgreSQL em segundo plano (-d). Aguarde até que o contêiner esteja em execução.
 
-    Você pode verificar o status do contêiner com o seguinte comando:
+Você pode verificar o status do contêiner com o seguinte comando:
 
 docker ps
 
