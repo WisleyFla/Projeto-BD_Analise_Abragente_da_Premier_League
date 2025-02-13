@@ -128,40 +128,39 @@ print(f"Usuário: {db_user}, Senha: {db_password}")
 
 Como a biblioteca os é usada aqui:
 
-from kivy.app import App
-from kivy.uix.label import Label
+import os
+from dotenv import load_dotenv
 
-class MinhaApp(App):
-    def build(self):
-        return Label(text="Olá, Kivy!")
+# Carrega as variáveis de ambiente do arquivo .env
+load_dotenv()
 
-if __name__ == "__main__":
-    MinhaApp().run()
+def conecta_bd():
+    try:
+        conn = psycopg2.connect(
+            user=os.getenv("DB_USER"),  # Usuário do banco de dados
+            # os.getenv("DB_USER"): Aqui, a função tenta recuperar o valor da variável de ambiente chamada DB_USER, que deve conter o nome do usuário para a conexão com o banco de dados.
+            
+            password=os.getenv("DB_PASSWORD"),  # Senha do banco de dados
+            #os.getenv("DB_PASSWORD"): Da mesma forma, essa linha tenta recuperar o valor da variável de ambiente DB_PASSWORD, que contém a senha do banco de dados.
+            
+            host=os.getenv("DB_HOST"),  # Host do banco de dados
+            #os.getenv("DB_HOST"): A variável DB_HOST armazena o endereço do servidor do banco de dados (ex: localhost ou um IP remoto).
+            
+            port=os.getenv("DB_PORT"),  # Porta do banco de dados
+            #os.getenv("DB_PORT"): Aqui, o valor de DB_PORT é recuperado, geralmente a porta na qual o banco de dados PostgreSQL está escutando (ex: 5432).
+            
+            database=os.getenv("DB_NAME")  # Nome do banco de dados
+            #os.getenv("DB_NAME"): Por fim, essa linha acessa a variável DB_NAME, que contém o nome do banco de dados com o qual você deseja se conectar.
+            
+        )
+        print("Banco conectado com sucesso!!")
+        return conn
+    except Error as e:
+        print(f"Ocorreu um erro ao conectar ao banco: {e}")
+        return None
 
-5. wxPython
 
-    O wxPython é outra biblioteca popular para criar interfaces gráficas. Para instalá-lo, use o pip.
 
-Passo a passo:
-
-    Abra o terminal ou prompt de comando.
-
-    Execute o seguinte comando:
-    bash
-    Copy
-
-    pip install wxPython
-
-Exemplo de uso:
-
-import wx
-
-app = wx.App(False)
-frame = wx.Frame(None, title="Minha Aplicação", size=(300, 200))
-panel = wx.Panel(frame)
-label = wx.StaticText(panel, label="Olá, wxPython!", pos=(100, 80))
-frame.Show(True)
-app.MainLoop()
 
 # 💻 Instalação do PostgreSQL (Sistema de Gerenciamento de Banco de Dados)
 Instalando o PostgreSQL
@@ -246,37 +245,28 @@ docker-compose down
 
 Isso desligará e removerá o contêiner PostgreSQL. Certifique-se de que nenhum dado importante seja perdido antes de executar este comando.
 
-# 💻 Frontend
-    Como o tkinter já vem instalado com o Python, você só precisa criar um arquivo Python (por exemplo, app_tkinter.py) com o código fornecido e executá-lo.
 
-Passo a passo:
-
-    Crie um arquivo chamado app_tkinter.py e cole o código abaixo:
-
-    import tkinter as tk
-
-    root = tk.Tk()
-    root.title("Minha Aplicação")
-    root.geometry("300x200")
-
-    label = tk.Label(root, text="Olá, Tkinter!")
-    label.pack()
-
-    root.mainloop()
-
-    Abra o terminal ou prompt de comando.
-
-    Navegue até o diretório onde o arquivo app_tkinter.py está salvo.
-
-    Execute o comando:
-    bash
-
-    python app_tkinter.py
 
 # 💻 Backend
-Instale as dependências
 
-$ npm install
+Instale as dependências a sua preferencia, seja o visualcode ou Thonny. Vou dá o exemplo do Thonny
+
+Acesse o site do Thonny:
+
+Vá até a página oficial de downloads do Thonny: https://thonny.org/.
+
+Baixar o instalador:
+
+Na página inicial, clique no botão "Download" para Windows
+
+Iniciar a instalação:
+
+Após o download, clique no arquivo .exe para iniciar o processo de instalação.
+Siga as instruções do instalador, que são bem simples. Geralmente, basta clicar em "Next" até finalizar.
+
+Finalizar e iniciar o Thonny:
+
+Após a instalação, você pode iniciar o Thonny a partir do menu Iniciar do Windows, procurando por "Thonny".
 
 
 
