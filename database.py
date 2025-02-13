@@ -32,18 +32,4 @@ if __name__ == "__main__":
     if conn:
         encerra_conn(conn)
 
-"""def salvar_imagem(nome_arquivo, conn):
-    cursor = conn.cursor()
-    with open(nome_arquivo, 'rb') as file:
-        imagem_binaria = file.read()
-
-    cursor.execute("INSERT INTO imagens (nome, imagem) VALUES (%s, %s)", 
-                   ("Imagem Exemplo", imagem_binaria))
-    conn.commit()
-    print("Imagem salva com sucesso!")
-
-# Chamada do código
-conn = conecta_bd()
-if conn:
-    salvar_imagem("imagem_exemplo.jpg", conn)
-    conn.close()"""
+        
