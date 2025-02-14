@@ -7,12 +7,8 @@ import os
 from crud_elenco import CRUDElenco
 from crud_time import CRUDTime
 from crud_funcionarios import CRUDFuncionario
-from elenco_dialogs import (
-    InsertElencoDialog,
-    SelectElencoDialog,
-    DeleteElencoDialog,
-    UpdateElencoDialog
-)
+from elenco_dialogs import InsertElencoDialog,SelectElencoDialog,DeleteElencoDialog,UpdateElencoDialog
+
 from time_dialogs import InsertTimeDialog, SelectTimeDialog, UpdateTimeDialog, DeleteTimeDialog
 from funcionarios_dialogs import InsertFuncionarioDialog, SelectFuncionarioDialog, UpdateFuncionarioDialog, DeleteFuncionarioDialog
 
@@ -35,7 +31,7 @@ class CRUDApp(QMainWindow):
         self.resize(1000, 600)
         self.setStyleSheet("""
             QMainWindow {
-                background-color: #0A1929;  /* Azul escuro */
+                background-color: #000000;  /* Azul escuro */
             }
             QLabel {
                 font-size: 16px;
@@ -174,9 +170,9 @@ class CRUDApp(QMainWindow):
         # Add instructions
         instructions = QLabel(
             "\nInstruções:\n\n"
-            "1. Use o menu 'Time' para gerenciar os times da Premier League\n"
-            "2. Use o menu 'Elenco' para gerenciar os jogadores\n"
-            "3. Use o menu 'Funcionários' para gerenciar a equipe técnica\n"
+            "Use o menu 'Time' para gerenciar os times da Premier League\n"
+            "Use o menu 'Elenco' para gerenciar os jogadores\n"
+            "Use o menu 'Funcionários' para gerenciar a equipe técnica\n"
         )
         instructions.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(instructions)
